@@ -7,7 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 file(GLOB_RECURSE SOURCES 
     #"${PROJECT_SOURCE_DIR}/*.h"
     #"${PROJECT_SOURCE_DIR}/*.c"
-
+    $client/*.c
+    $server/*.c
     # "${PROJECT_SOURCE_DIR}/Orderbook/*.cpp"
     main.c
 )
