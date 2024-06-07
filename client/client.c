@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+
+// int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+
+
 void client()
 {
     int op = {0};
