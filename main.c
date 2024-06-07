@@ -1,9 +1,12 @@
 #include <stdio.h>
-#include "client/client.c"
+
+/*
 
 int main()
 {
-    client();
+    printf("DO SOMETHING!");
 
     return 0;
 }
+
+*/
