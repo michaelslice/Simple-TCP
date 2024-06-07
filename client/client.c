@@ -11,12 +11,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-int main()
-{
-    client();
-    // client_side();
-    return 0;
-}
 
 void client_side()
 {
@@ -58,41 +52,61 @@ void client_side()
     close(sockfd);
 };
 
+void set_name()
+{
+    char name[100]; 
+    printf("Please Enter A User Name: ");
+    scanf("%s", name);
+};
+
+void create_chat_room()
+{
+    char server_name[100];
+    printf("Hello Please Enter Chat Room Name for Creation: ");
+    scanf("%s", server_name);
+
+    printf(server_name);
+    printf("\n");
+};
+
+void print_chat_rooms()
+{
+
+};
+
 void client()
 {
     int op = 0;
-    
+    int option = 0;
+
     printf("Hello welcome to Simple Chat, please pick a command. \n");
-         
+
     while(op != 5)
     {
         printf("Change User Name (Enter 1) \n");
         printf("Join a Chat Room (Enter 2) \n");
         printf("Create Chat Room (Enter 3) \n");
-        printf("Print List of Chat Rooms (Enter 4) \n");
-        
+        printf("Print List of Chat Rooms (Enter 4) \n");   
         printf("Quit (Enter 5) \n");
 
-        (scanf("%d", &op));
-        
+        scanf("%d", &op);
+
         switch (op)
         {
         case 1:
-            
-            client_side();
-            
+            set_name();
             break;
         case 2:
-
+            client_side();
             break;
         case 3:
-
+            create_chat_room();
             break;
         case 4:
 
             break;
         case 5:
-
+            printf("Goodbye!");
             break;
         default:
             printf("Error Invalid Option Entered \n");
@@ -100,3 +114,12 @@ void client()
         }
     }
 };
+
+
+int main()
+{
+    // Run client mode
+    client();
+
+    return 0;
+}

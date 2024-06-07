@@ -17,6 +17,6 @@ list(FILTER CLIENT_SOURCES EXCLUDE REGEX ".*CMakeCXXCompilerId.cpp$")
 list(FILTER SERVER_SOURCES EXCLUDE REGEX ".*CMakeCXXCompilerId.cpp$")
 list(FILTER COMMON_SOURCES EXCLUDE REGEX ".*CMakeCXXCompilerId.cpp$")
 
-# add executables
+# Add executables
 add_executable(Client ${CLIENT_SOURCES} ${COMMON_SOURCES})
 add_executable(Server ${SERVER_SOURCES} ${COMMON_SOURCES})
