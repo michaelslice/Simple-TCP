@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
-
+#include <sys/unistd.h>
 
 void client_side()
 {
@@ -61,9 +61,35 @@ void set_name()
 
 void create_chat_room()
 {
+    int chatrooms[20];
+
+    struct sockaddr_in server_addr;
+    int sockfd;
+    
     char server_name[100];
     printf("Hello Please Enter Chat Room Name for Creation: ");
     scanf("%s", server_name);
+    
+    char server_port[100];
+    printf("Hello Please Enter Chat Room Name for Creation: ");
+    scanf("%d", server_port);
+    
+    sockfd = socket(AF_INET, SOCK_STREAM, 0); 
+    if (sockfd < 0)
+    {
+        perror("Socket Creation Failed.");
+        exit(1);
+    }
+
+    server_addr.sin_family = AF_INET; 
+    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server_addr.sin_port = htons(server_port);
+
+    if (bind(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
+    {
+        perror("Binding Failed.");
+        exit(1);
+    }
 
     printf(server_name);
     printf("\n");
@@ -73,6 +99,7 @@ void print_chat_rooms()
 {
 
 };
+
 
 void client()
 {
@@ -115,6 +142,12 @@ void client()
     }
 };
 
+int get_ip_address()
+{
+    char hostname[128];
+    gethostname(hostname, sizeof(hostname));
+    printf("My hostname: %s\n", hostname);
+}
 
 int main()
 {
