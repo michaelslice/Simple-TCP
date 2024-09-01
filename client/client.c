@@ -38,25 +38,27 @@ void client_side()
     }
 
     char message[256];
-    printf("Enter message");
-    fgets(message, sizeof(message), stdin);
+    
+    while (message != "2"){
+        printf("Enter message: ");
+        fgets(message, sizeof(message), stdin);
 
-    int bytes_sent = send(sockfd, message, strlen(message), 0); 
-    if (bytes_sent < 0)
-    {
-        perror("Send Failed");
-        close(sockfd);
-        exit(1);
+        if(message == "2"){
+            close(sockfd);
+            exit(1);
+            break;
+        }
+
+        int bytes_sent = send(sockfd, message, strlen(message), 0); 
+        if (bytes_sent < 0)
+        {
+            perror("Send Failed");
+            close(sockfd);
+            exit(1);
+        }
     }
 
     close(sockfd);
-};
-
-void set_name()
-{
-    char name[100]; 
-    printf("Please Enter A User Name: ");
-    scanf("%s", name);
 };
 
 void create_chat_room()
@@ -81,65 +83,18 @@ void create_chat_room()
         exit(1);
     }
 
-    server_addr.sin_family = AF_INET; 
-    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    server_addr.sin_port = htons(server_port);
-
-    if (bind(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
-    {
-        perror("Binding Failed.");
-        exit(1);
-    }
-
     printf(server_name);
     printf("\n");
 };
-
-void print_chat_rooms()
-{
-
-};
-
 
 void client()
 {
     int op = 0;
     int option = 0;
 
-    printf("Hello welcome to Simple Chat, please pick a command. \n");
-
-    while(op != 5)
-    {
-        printf("Change User Name (Enter 1) \n");
-        printf("Join a Chat Room (Enter 2) \n");
-        printf("Create Chat Room (Enter 3) \n");
-        printf("Print List of Chat Rooms (Enter 4) \n");   
-        printf("Quit (Enter 5) \n");
-
-        scanf("%d", &op);
-
-        switch (op)
-        {
-        case 1:
-            set_name();
-            break;
-        case 2:
-            client_side();
-            break;
-        case 3:
-            create_chat_room();
-            break;
-        case 4:
-
-            break;
-        case 5:
-            printf("Goodbye!");
-            break;
-        default:
-            printf("Error Invalid Option Entered \n");
-            break;
-        }
-    }
+    printf("Hello welcome to Simple Chat, please enter a message (Press 2 to Quit). \n");
+    client_side();
+    
 };
 
 int get_ip_address()

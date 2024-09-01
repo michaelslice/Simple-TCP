@@ -11,14 +11,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-int main()
-{
-    // Run server
-    
-    server_side();
-    return 0;
-}
-
 void server_side()
 {
     // File descriptors, info on client, and server socket addresses
@@ -105,3 +97,11 @@ void server_side()
     
     close(sockfd); // Close all connections
 };
+
+int main()
+{
+    // Run server
+    
+    server_side();
+    return 0;
+}
